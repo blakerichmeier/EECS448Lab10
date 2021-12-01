@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>View Users Post</title>
+    <meta charset="utf-8">
+    </meta>
+  </head>
+  <body>
+			<?php 
+				$mysqli = new mysqli("mysql.eecs.ku.edu", "b808r060", "aiw4ooho", "b808r060"); 
+				if ($mysqli->connect_errno) { 
+					printf("Connect failed: %s\n", $mysqli->connect_error);
+				} 
+				$query = "SELECT * FROM Users";
+			?>
+    <form action="ViewUserPosts.php" method="post">
+      <select name="users">
+			<?php 
+				if($result = $mysqli->query($query)) { 
+					while($row = $result->fetch_assoc()) { 
+					echo "<option>" . $row["user_id"] . "</option>";
+					}
+				} 
+			?>
+			</select>
+      <input type="submit" value="Submit">
+    </form>
+  </body>
+</html>
